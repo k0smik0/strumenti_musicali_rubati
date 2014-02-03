@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<Module>
+  <ModulePrefs title="hello world example" /> 
+  <Content type="html">
+     <![CDATA[ 
+	<html>
+	  <head>
+	    <script type="text/javascript" src="js/ICanHaz.js"></script> 
+	    <script src='http://api.tiles.mapbox.com/mapbox.js/v1.0.0/mapbox.js'></script>
+	    <script src='js/jquery.js '></script>
+	    <script type="text/javascript" src='js/d3.js'></script>
+	    <script type="text/javascript" src='js/tabletop.js'></script>
+	    <script type="text/javascript" src='js/sheetsee.js'></script>
+			  
+	    <link href='http://api.tiles.mapbox.com/mapbox.js/v1.0.0/mapbox.css' rel='stylesheet' />
+	    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600|Merriweather:400,700' rel='stylesheet' />
+	    <link rel="stylesheet" type="text/css" href="css/style.css"> 
+	    <link rel="stylesheet" type="text/css" href="css/site.css">
+	  </head>
+	  <body>
+
+	  <div></div>
+
+	  <script type="text/javascript">
+	      document.addEventListener('DOMContentLoaded', function() {
+		  var gData;
+		  var URL = "0ApCxUDoGDKvkdE94ZWxwaDRTTnp2Sm9Ta09YcEctcUE";
+		  Tabletop.init( { key: URL, callback: showInfo, simpleSheet: true } )
+	      })
+	      function showInfo2(data) {
+		  gData = data
+		  //
+		  //everything you do with sheetsee goes here
+		  //
+	      }
+	  </script>
+
+	  <input id="tableFilter" type="text" placeholder="filter by.."></input>
+	  <span class="clear button">Clear</span>
+	  <span class="noMatches">no matches</span>
+	  <div id="siteTable"></div>
+
+	  <script id="siteTable" type="text/html">
+	      <table>
+	      <tr>
+		<th class="tHeader">Nome Cognome</th>
+		<th class="tHeader">Email</th>
+		<th class="tHeader">Luogo del furto</th>
+		<th class="tHeader">Data del furto</th>
+		<th class="tHeader">Codice seriale dello strumento</th>
+		<th class="tHeader">Immagini dello strumento</th>
+		<th class="tHeader">Immagini della denuncia</th>
+	      </tr>
+		{{#rows}}
+		  <tr>
+		    <td>{{nomecognome}}</td>
+		    <td><a href="mailto:{{email}}">{{email}}</a></td>
+		    <td>{{luogodelfurto}}</td>
+		    <td>{{datadelfurto}}</td>
+		    <td>{{codiceserialedellostrumento}}</td>
+		    <td>{{immaginidellostrumento}}</td>
+		    <td>{{immaginidelladenuncia}}</td>
+		  </tr>
+		{{/rows}}
+	    </table>
+	  </script>
+
+	  <script type="text/javascript">
+	    function showInfo(data) {
+	      gData = data
+	/*      document.addEventListener('DOMContentLoaded', function() { // IE6 doesn't do DOMContentLoaded
+		  Sheetsee.makeTable(gData, "#siteTable")
+		  Sheetsee.initiateTableFilter(gData, "#tableFilter", "#siteTable")
+	      });
+	*/
+	      Sheetsee.makeTable(gData, "#siteTable");
+	      Sheetsee.initiateTableFilter(gData, "#tableFilter", "#siteTable");
+	    }
+	  </script>
+
+	</body>
+	</html>
+     ]]>
+  </Content> 
+</Module>
